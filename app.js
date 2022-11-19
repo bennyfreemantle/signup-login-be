@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import userRouter from "./routes/users.js";
+import todoRouter from "./routes/todos.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/todos", todoRouter);
 
 app.listen(PORT, () => {
   console.log(`Running server on http://localhost:${PORT}`);

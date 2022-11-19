@@ -9,3 +9,12 @@ export async function getUsers() {
     return error;
   }
 }
+
+export async function getUserById(id) {
+  try {
+    const user = await query("SELECT id FROM users WHERE id = $1", [id]);
+    return user.rows[0];
+  } catch (error) {
+    return error;
+  }
+}
