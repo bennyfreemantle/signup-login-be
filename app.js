@@ -31,5 +31,5 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/todos", todoRouter);
 
 app.listen(PORT, () => {
-  console.log(`Running server on http://localhost:${PORT}`);
+  console.log(`Running server on ${PORT}`);
 });
