@@ -1,6 +1,6 @@
 import express from "express";
 import { requireAuth } from "../middleware/requireAuth.js";
-import { createTodo, deleteTodo, getTodos } from "../models/todo.js";
+import { createTodo, deleteTodo, editTodo, getTodos } from "../models/todo.js";
 
 const todoRouter = express.Router();
 
@@ -38,10 +38,26 @@ todoRouter.post("/", async (req, res) => {
   }
 });
 
-todoRouter.delete("/:id", async (req, res) => {
-  const id = req.params.id;
+todoRouter.patch("/:id", async (req, res) => {
+  const { editedTodo } = req.body;
+  const user_id = req.params.id;
+  console.log(user_id);
+  console.log(req.body);
   try {
-    const todos = await deleteTodo(id);
+    const todos = await editTodo(editedTodo, user_id);
+    console.log(todos);
+    res.status(200).json({ payload: todos });
+  } catch (error) {
+    res.status(400).json({
+      error: error.message,
+    });
+  }
+});
+
+todoRouter.delete("/:id", async (req, res) => {
+  const user_id = req.params.id;
+  try {
+    const todos = await deleteTodo(user_id);
     res.status(200).json({ payload: todos });
   } catch (error) {
     res.status(400).json({
