@@ -1,6 +1,6 @@
 import express from "express";
 import { requireAuth } from "../middleware/requireAuth.js";
-import { getTodos } from "../models/todo.js";
+import { createTodo, getTodos } from "../models/todo.js";
 
 const todoRouter = express.Router();
 
@@ -23,6 +23,20 @@ todoRouter.get("/", async (req, res) => {
       error: error.message,
     });
   }
+});
+
+todoRouter.post("/", async (req, res) => {
+  const { input } = req.body;
+  const user_id = req.user.id;
+  try {
+    const todos = await createTodo(input, user_id);
+    res.status(200).json({ payload: todos });
+  } catch (error) {
+    res.status(400).json({
+      error: error.message,
+    });
+  }
+  // res.status(200).json({ payload: { id: 123123123, todo_name: "todos" } });
 });
 
 export default todoRouter;
