@@ -22,3 +22,14 @@ export async function createTodo(input, user_id) {
     return error;
   }
 }
+
+export async function deleteTodo(id) {
+  try {
+    const todos = await query(`DELETE FROM todos WHERE id = $1 RETURNING *;`, [
+      id,
+    ]);
+    return todos.rows[0];
+  } catch (error) {
+    return error;
+  }
+}
