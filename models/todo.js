@@ -17,7 +17,6 @@ export async function createTodo(input, user_id) {
       `INSERT INTO todos (todo_name, user_id) VALUES ($1, $2) RETURNING *;`,
       [input, user_id]
     );
-    console.log(todos);
     return todos.rows[0];
   } catch (error) {
     return error;

@@ -36,7 +36,6 @@ todoRouter.post("/", async (req, res) => {
       error: error.message,
     });
   }
-  // res.status(200).json({ payload: { id: 123123123, todo_name: "todos" } });
 });
 
 export default todoRouter;

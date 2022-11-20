@@ -20,7 +20,6 @@ export async function requireAuth(req, res, next) {
     req.user = await getUserById(id);
     next();
   } catch (error) {
-    console.log(error);
     res.status(401).json({
       error: "Request is not authorized",
     });
