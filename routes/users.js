@@ -13,6 +13,7 @@ const createToken = (id) => {
 // * SIGNUP USER
 userRouter.post("/signup", async (req, res) => {
   const { user_name, user_email, user_password } = req.body;
+  console.log(user_name, user_email, user_password);
   try {
     const user = await signUpUser(user_name, user_email, user_password);
     // Create a token with the id of our user, that the database creates for us
